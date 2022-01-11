@@ -6,6 +6,9 @@
 * Mysql
 * Lombok
 
+## Maven project run
+*  mvn  BilgeadamSpringMvcForm:run
+
 # project Architecture
 * abstract
 * interface

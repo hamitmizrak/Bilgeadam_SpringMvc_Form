@@ -136,7 +136,8 @@ log.info( writerDto.getId()+" "
         +writerDto.getWriterAddress()+" "
         +writerDto.getWriterTelephoneNumber()
        );
-//Database Create işlemleri burada yapacağız.
+        //dosyaya yazdırma
+        //Database Create işlemleri burada yapacağız.
         model.addAttribute("form_key",writerDto );
         return "form";
     }

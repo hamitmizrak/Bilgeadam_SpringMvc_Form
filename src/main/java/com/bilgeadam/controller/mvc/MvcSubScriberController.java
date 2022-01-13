@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class MvcSubScriberController {
 
+
     //sadece ekranda göstermeye yarar
     //localhost:8080/birinciuygulama
     @GetMapping("/birinci")

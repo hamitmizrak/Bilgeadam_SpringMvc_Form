@@ -130,7 +130,7 @@ public class ObjectController {
     //client yazdıklarını almak istiyorum
     @PostMapping("/writer")
     public String postWriter(Model model,WriterDto writerDto) {
-log.info( writerDto.getId()+" "
+        log.info( writerDto.getId()+" "
         +writerDto.getWriterName()+" "
         +writerDto.getWriterSurname()+" "
         +writerDto.getWriterAddress()+" "

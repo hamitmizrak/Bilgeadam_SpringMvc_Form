@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter @ToString
-public class DatabaseInformation {
+public abstract class DatabaseInformation {
     private String url;
     private String userName;
     private String userPassword;

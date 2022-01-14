@@ -6,22 +6,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Abone sayfası</title>
+    <title>Merhabalar Jsp</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<h2 class="text-primary">Abone Sayfasına Hoşgeldiniz</h2>
 
-<ul class="list-group">
-    <li class="list-group-item text-success">Mesaj ${message}</li>
-    <li class="list-group-item text-primary">ID:${student_key.studentId}</li>
-    <li class="list-group-item text-primary">NAME:${student_key.studentName}</li>
-    <li class="list-group-item text-primary">SURNAME:${student_key.studentSurname}</li>
-</ul>
-<%--//JSF--%>
-<%--//JSP--%>
-<%--//Themaleaf--%>
-<%--//React--%>
+<h1>BOŞ SAYFA</h1>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>

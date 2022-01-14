@@ -1,7 +1,9 @@
 package com.bilgeadam.controller.mvc;
 
+import com.bilgeadam.dao.SubScriberDao;
 import com.bilgeadam.dto.SubScriberDto;
 import com.bilgeadam.dto.WriterDto;
+import com.bilgeadam.io.SubscriberFileWriterReader;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,89 +14,55 @@ import org.springframework.web.bind.annotation.*;
 public class MvcSubScriberController {
 
 
-    //sadece ekranda göstermeye yarar
-    //localhost:8080/birinciuygulama
-    @GetMapping("/birinci")
-    @ResponseBody
-    public String getQuery() {
-        return "Yükleniyor ... ";
-    }
-
-    //bir sayfaya yönlendirmek için
-    //localhost:8080/ikinciuygulama
-    @GetMapping("/ikinci")
-    public String secondMethod() {
-        return "subscriper_key";
-    }
-
-
-
-    //şimdiye kadar sadece veri gösterdik artık bizde _2_query sayfasına veri göndererlim.
-    //localhost:8080/dorduncuuygulama
-    //@GetMapping ==> URL
-    //retun ==>gidilecek sayfa
-    // Model  <== Controller  ==>   View
-    @GetMapping("/dorduncu")
-    public String fourMethod(Model model) {
-        model.addAttribute("subscriper_key","value");
-        return "subscriper";
-    }
-
-
-
-    //////////////////////////////PATHVARIABLE/////////////////////////////////////////////////////////////
-
-    @GetMapping({"yedinci", "yedinci/{param2}"})
-    public String sevenMethod(Model model, @PathVariable(name = "param2", required = false) Long id23) {
-        if (id23 != null) {
-            model.addAttribute("subscriper_key", " Görkem Sönmez ID: " + id23);
-        } else {
-            model.addAttribute("subscriper_key", " Data Yok ID: ");
-        }
-        return "subscriper";
-    }
-
-    //////////////////////////////REQUESTPARAMETER/////////////////////////////////////////////////////////////
-
-
-    //localhost:8080/onuncuuygulama?adi=Hamit&soyadi=Mızrak&numara=44
-    @GetMapping("/onuncu")
-    public String tenMethod(
-            Model model,
-            @RequestParam(name = "adi") String name,
-            @RequestParam(name = "soyadi") String surname,
-            @RequestParam(name = "numara", required = false, defaultValue = "99") Long number
-    ) {
-        String temp = name.toLowerCase();
-        model.addAttribute("subscriper_key", " Selamlar  " + temp + " soydınız: " + surname + " " + number);
-        return "subscriper";
-    }
-
-    ////////////////////////////Form////////////////////////////////////////////////////////////////////////////////
-    @GetMapping("/writer")
+    //localhost:7777/subscriber
+    //subscriperform.jsp
+    @GetMapping("/subscriber")
     public String getWriter(Model model) {
         //Database select
-//        SubScriberDto writerDto = SubScriberDto.builder()
-//                        .writerName("adınızı girmediniz")
-//                        .writerSurname("Soyadınızı girmediniz")
-//                        .writerAddress("address girmediniz")
-//                        .writerTelephoneNumber("telefon girmediniz").build();
-//        model.addAttribute("form_key",writerDto );
-        return "subscriper";
+        SubScriberDto subScriberDto=SubScriberDto.builder()
+                .subScriberId(44)
+                .subScriberAddress("adres alanı girmediniz")
+                .subScriberName("adı girmediniz")
+                .subScriberEmailAddress("email adresi girmediniz")
+                .subScriberSurname("Soyadını girmediniz")
+                .build();
+        model.addAttribute("validation_key",subScriberDto );
+        return "subscriperform";
     }
 
+    //localhost:7777/subscriber
     //client yazdıklarını almak istiyorum
-    @PostMapping("/writer")
+    @PostMapping("/subscriber")
     public String postWriter(Model model,SubScriberDto subScriberDto) {
-//        log.info( subScriberDto.getId()+" "
-//        +subScriberDto.getWriterName()+" "
-//        +subScriberDto.getWriterSurname()+" "
-//        +subScriberDto.getWriterAddress()+" "
-//        +subScriberDto.getWriterTelephoneNumber()
-//       );
-        model.addAttribute("subscriper_key",subScriberDto );
-        return "subscriper";
+        model.addAttribute("validation_key",subScriberDto );
+
+        if(subScriberDto!=null){
+            //log birimi
+            log.info(subScriberDto.getSubScriberId()+" "
+                    +subScriberDto.getSubScriberName()+" "
+                    +subScriberDto.getSubScriberSurname()+" "
+                    +subScriberDto.getSubScriberAddress()+" "
+                    +subScriberDto.getSubScriberEmailAddress()
+            );
+
+            //database
+            SubScriberDao subScriberDao=new SubScriberDao();
+            subScriberDao.create(subScriberDto);
+
+            //file
+            SubscriberFileWriterReader file=new SubscriberFileWriterReader();
+            file.bilgeadamFileWriter(subScriberDto);
+
+            //dosya okuma
+            file.bilgeadamFileReader();
+
+            //eğer başarılı ise success.jsp sayfasına göndermek istiyorum
+            return "success";
+        }
+        //eğer başarılı değilse aynı sayfada kalsın
+        return "subscriperform";
     }
+
 
 
 }

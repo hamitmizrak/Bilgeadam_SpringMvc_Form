@@ -14,7 +14,7 @@ public class WriterDto extends CommonProperty {
     private String writerName;
     private String writerSurname;
     private String writerAddress;
-    private String writerTelephoneNumber;
+    private double writerTelephoneNumber;
 
     //parametresiz constructor
     public WriterDto() {
@@ -22,7 +22,7 @@ public class WriterDto extends CommonProperty {
     }
 
     //parametreli constructor
-    public WriterDto(int id, Date date, String writerName, String writerSurname, String writerAddress, String writerTelephoneNumber) {
+    public WriterDto(int id, Date date, String writerName, String writerSurname, String writerAddress, double writerTelephoneNumber) {
         super(id, date);
         this.writerName = writerName;
         this.writerSurname = writerSurname;
@@ -31,7 +31,7 @@ public class WriterDto extends CommonProperty {
     }
 
     //parametreli constructor
-    public WriterDto(String writerName, String writerSurname, String writerAddress, String writerTelephoneNumber) {
+    public WriterDto(String writerName, String writerSurname, String writerAddress, double writerTelephoneNumber) {
         this.writerName = writerName;
         this.writerSurname = writerSurname;
         this.writerAddress = writerAddress;

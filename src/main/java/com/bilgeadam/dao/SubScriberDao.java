@@ -70,7 +70,6 @@ public class SubScriberDao implements IDaoConnection <SubScriberDto> {
             log.error(e.getMessage() + " SubScriberDao Delete Hata meydana geldi  ");
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -96,6 +95,5 @@ public class SubScriberDao implements IDaoConnection <SubScriberDto> {
         }
         return list2;
     }
-
 }
 

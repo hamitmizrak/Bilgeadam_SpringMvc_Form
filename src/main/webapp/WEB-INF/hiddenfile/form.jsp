@@ -38,6 +38,7 @@
 
         <fieldset class="form-group">
             <form:input cssClass="form-control" path="writerSurname"/>
+            <form:errors path="writerSurname"/>
         </fieldset>
 
         <fieldset class="form-group">
